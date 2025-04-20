@@ -1,8 +1,10 @@
-#include <stdlib.h>
 #include <stdio.h>
 
 
-int main(){
-    printf("Eva from 0 to Hero : Progress bar |**---------------------|");
+int main(void){
+    printf("Hello world !");
     return 0;
 }
+
+
+ls
