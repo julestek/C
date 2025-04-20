@@ -1,0 +1,84 @@
+Cet exercice va vous faire coder un "vieux" jeu des années 80, du siècle dernier quoi : ISOLA.
+
+Le principe est très simple : deux joueurs s'affrontent sur un terrain constitué de 6 lignes et de 8 colonnes.
+Chacun des joueurs choisit une case "libre". Les deux joueurs ne peuvent jamais partager la même case.
+Les joueurs doivent successivement se déplacer sur une case adjacente libre  puis détruire 
+ une case "libre" du terrain.
+ Le premier joueur qui ne peut plus bouger (bloqué par des cases détruites et/ou l'autre joueur) est déclaré perdant.
+
+Le terrain est un tableau statique à deux dimensions.
+
+Pour éviter certains tests en bordure, le terrain est en fait plus grand et bordé par des cases "détruites". Ainsi la première ligne, 
+la dernière ligne, la première colonne et la dernière colonne ne seront pas utilisables par les joueurs.
+
+En interne, cela va donner quelque chose comme cela :
+-1 -1 -1 -1 -1 -1 -1
+-1                ->   
+-1                -1
+-1 -1 -1 -1 -1 -1 -1
+
+Certaines fonctions sont à développer puis à réutiliser dans les tests.
+Si vous ne réussissez pas à les écrire, sachez que dans les tests d'évaluation 
+elles seront remplacées par des versions fonctionnelles.
+
+
+INITIALISER
+
+La fonction initialiser() permet d'initialiser Terrain avec des cases libres (et les bordures si vous les utilisez)
+
+AFFICHER
+
+La fonction afficher() permet d'afficher dans le flux/fichier donné en paramètre le terrain à l'instant t.
+On représente également les indices de lignes et de colonnes pour jouer.
+
+RAPPEL : Le format %3d permet d'afficher un décimal sur 3 colonnes au moins
+
+DETRUIRE
+
+La fonction detruire() permet de detruire la case du terrain dont les indices sont données en paramètre.
+Si les paramètres sont incorrects ou bien si la case ne peut être détruite, la fonction renvoie 0.
+
+TROUVER
+
+La fonction trouver() permet de trouver la ligne et la colonne où se trouve le joueur dont le numero 
+est donné en parametre. Si rien n'est trouvé, on reverra -1 pour ces informations
+
+PLACER
+
+La fonction placer() permet de placer le joueur donné par son numéro sur le terrain à la position 
+i et j. Le terrain est mis à jour.
+Le joueur ne peut etre posé que sur une case vide dont les indices sont valides.
+Si le joueur a déjà été placé, la position est mise à jour (sinon on fait rien).
+
+DEPLACER 
+
+La fonction deplacer() permet de déplacer le joueur donné en parametre sur le terrain donne en parametre
+dans la direction donnée par le dernier parametre.
+On se sert du pavé numérique pour donner la direction => par exemple, 7 déplace d'une case vers le haut à gauche.
+5 et 0 ne devraient pas être utilisées.
+
+7 8 9
+4 J 6
+1 2 3
+
+Pour vous aider, la constante PAVE (comme pave numerique).
+ PAVE[4] vaut {-1, 0} ou encore PAVE[4][0] = -1 et PAVE[4][1] vaut 0
+
+BLOQUE
+
+La fonction bloque() permet de savoir si le joueur donné en paramètre est bloqué ou PAS. 
+C'est à dire si le joueur est complètement entouré par des cases détruites ou le/les autres joueurs.
+L'utilisation de PAVE n'est pas obligatoire mais peut aider.
+
+CONNEXE
+
+La fonction connexe() permet de savoir s'il existe un chemin entre les joueurs dont le numéro est donné en paramètre.
+
+
+CONSIGNES : 
+
+* Tout le code est à placer dans code.h et code.c 
+* Vous pouvez modifier le fichier de tests (exo1.c) bien entendu si vous ne changez pas la philosophie des tests.
+* Si un test fonctionne, ne le recommentez surtout pas
+* Le programme doit compiler à la fin de l'examen. Si vous avez fait des copies du répertoire pendant l'examen, 
+  seule la copie qui vous donnera la meilleure note sera prise en compte.

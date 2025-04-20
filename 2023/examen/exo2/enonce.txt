@@ -1,0 +1,11 @@
+Cet exercise vise à transformer le terrain de jeu de l'exercice 1 en un 
+tableau dynamique à deux dimensions.
+
+Pour ce faire, vous devez définir une structure Jeu
+qui contient le terrain a deux dimensions et deux entiers C et L 
+pour le nombre de lignes et le nombre de colonnes
+
+Il faut donc adapter la fonction initialiser() avec de nouveaux parametres
+et creer la fonction liberer()
+
+Le reste des fonctions peut plus ou moins rester le meme.
