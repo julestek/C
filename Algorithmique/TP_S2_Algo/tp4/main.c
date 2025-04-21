@@ -47,6 +47,3 @@ void test_impression() {
   }
 }
 
-int main(int argc, char ** argv) {
-  
-}

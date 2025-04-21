@@ -222,7 +222,7 @@ void test_global(int n,int b)
 //------------------------------------------------------------------
 // tests question 4 : Problème des 8 dames
 //------------------------------------------------------------------
- 
+
 int test_dames(){
 	
 	liste_solutions * solutions=NULL;
@@ -239,6 +239,7 @@ int test_dames(){
 	
 	printf("Ensemble des solutions :\n");
 	displaySolutions(solutions,n);
+	listFree(solutions);
 	return 0;
 
 }
