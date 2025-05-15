@@ -93,17 +93,12 @@ int listProd(list* l ){
 }
 
 int opLen(int x, int y){
-    int res = x;
-    while (y>0){
-        res+=1;
-        y--;
-    }
-    return res;
+    return x + 1;
 }
 
 
-int listLen(list* l ){
-    return listFold(l, opLen, 1)/3 ;
+int listLen(list* l){
+    return listFold(l, opLen, 0);
 }
 
 // list * ajouteInverse(list * l1,list * l2){

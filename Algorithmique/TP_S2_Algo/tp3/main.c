@@ -38,8 +38,7 @@ int test_romains()
 //------------------------------------------------------------------
 
 list * liste_de_test(){
-	list * l = listCreate();
-	l =listAdd(NULL, 2 );
+	list * l =listAdd(NULL, 2 );
 	l =listAdd(l,5 );
 	l =listAdd(l,1 );
 	l =listAdd(l,4 );
@@ -239,7 +238,6 @@ int test_dames(){
 	
 	printf("Ensemble des solutions :\n");
 	displaySolutions(solutions,n);
-	listFree(solutions);
 	return 0;
 
 }
