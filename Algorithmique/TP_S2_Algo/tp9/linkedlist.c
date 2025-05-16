@@ -77,8 +77,21 @@ list* listCopy(list* l){
 list** listPivot(list* l, int pivot){
     list* gauche = listCreate();
     list* droite = listCreate();
+    list* temp = l;
+    
+    while (temp!=NULL){
 
-    // A COMPLETER
+
+
+
+
+
+
+
+
+        temp = temp->next;
+    }
+
 
     list ** duo = (list **) malloc(2*sizeof(list *));
     if (duo){

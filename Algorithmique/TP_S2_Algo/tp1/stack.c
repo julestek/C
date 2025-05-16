@@ -17,6 +17,7 @@ stack * stackAdd(stack * s, int v) {
 	return new;
 }
 
+
 int stackTop(stack * s) {
 	if (!stackIsEmpty(s)){
 		return s->value;

@@ -10,7 +10,7 @@ all: main
 	gcc $(GCC_FLAGS) -c $<
 
 main: $(OFILES) $(HFILES)
-	gcc $(LD_FLAGS) -o main $(OFILES) -fsanitize=address,undefined
+	gcc $(LD_FLAGS) -o main $(OFILES)
 
 clean:
 	-rm $(OFILES)
