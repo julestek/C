@@ -77,19 +77,31 @@ list* listCopy(list* l){
 list** listPivot(list* l, int pivot){
     list* gauche = listCreate();
     list* droite = listCreate();
-    list* temp = l;
+    list** pg = &gauche;
+    list** pd = &droite;
+    int i=0;
     
-    while (temp!=NULL){
+    while (l!=NULL){
+        list* suiv = l->next;
+        if (l->value > pivot){
+            *pd = l;
+            pd = &l->next;
+        }
+        else{
+            if (i==0){
+                free(l);
+                i++;
+            }
+            else{
+                *pg = l;
+                pg = &l->next;
+            }
+            l = suiv;
+        }
 
+        *pg = NULL;
+        *pd = NULL;
 
-
-
-
-
-
-
-
-        temp = temp->next;
     }
 
 
@@ -104,23 +116,45 @@ list** listPivot(list* l, int pivot){
 }
 
 list* reassemble(list* gauche, list* droite, int pivot){
-    // A COMPLETER
-    return NULL;
+    
+   list* l = listAdd(droite, pivot);
+   
+   list* temp = gauche;
+   while(temp->next!=NULL){
+        temp = temp -> next;
+   }
+   temp = l;
+   return gauche;
+
 }
 
 list* quickSort_rec(list* l){
-    // A COMPLETER
-    return NULL;
+    
+    if(l!=NULL){
+        int pivot = l->value;
+        list** duo = listPivot(l, pivot);
+        list* gauche = duo[0];
+        list* droite = duo[1];
+
+        gauche = quickSort_rec(gauche);
+        droite = quickSort_rec(droite);
+
+        reassemble(gauche, droite, pivot);
+    }
+
+    return l;
 }
 
+
 list* quickSort(list* l){
-    // A COMPLETER
-    return NULL;
+    list* copy = listCopy(l);
+    copy = quickSort_rec(copy);
+    return copy;
 }
 
 // Exo 2 : choix du pivot aleatoire
 int getRandomElement(list* l){
-    // A COMPLETER
+    
     return 0;
 }
 
@@ -138,3 +172,4 @@ list* quickSort_alea(list* l){
     // A COMPLETER
     return NULL;
 }
+ 

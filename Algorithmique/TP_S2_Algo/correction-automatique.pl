@@ -50,7 +50,7 @@ sub runTest {
     chdir("tmp");
     system("make clean 1> /dev/null 2> /dev/null");
     my $compilationReturn = system("make 1> /dev/null 2> /dev/null");
-    my $runReturn = system("timeout -k 5s 4s main 1> /dev/null 2> /dev/null");
+    my $runReturn = system("timeout -k 5s 4s ./main 1> /dev/null 2> /dev/null");
     my $result = "x";
     if ($compilationReturn==0) {
         if ($runReturn==0) {
