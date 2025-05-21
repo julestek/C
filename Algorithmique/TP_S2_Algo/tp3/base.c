@@ -38,13 +38,17 @@ int baseToDec(list* l){
 
 
 int baseToDec2(list* l){
-    
-    // TO DO : A compléter question 11 (si vous voulez faire avec les deux méthodes)
+    int res = 0;
+    int puissance = 1;
 
- 
-    return 0;
+    while (l != NULL) {
+        res += l->value * puissance;
+        puissance *= base;
+        l = l->next;
+    }
+
+    return res;
 }
-
 
 list* decToBase(int n ){
     if (n == 0) {

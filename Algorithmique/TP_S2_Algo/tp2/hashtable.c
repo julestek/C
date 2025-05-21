@@ -28,7 +28,7 @@ int hash(char * key, int n) {
 void listDisplay(list * l) {
 	list * temp = l;
 	while(temp!=NULL){
-		printf("(clé : %s, valeur : %s) -> ", l->key, l->value);
+		printf("(clé : %s, valeur : %s) -> ", temp->key, temp->value);
 		temp = temp->next;
 	}
 	printf("NULL\n");
@@ -49,8 +49,8 @@ void hashtableDisplay(hashtable * h) {
 
 list * listAdd(list * l, char * newK, char * newV) {
 	list * temp = malloc(sizeof(list));
-	temp->key = newK;
-	temp->value = newV;
+	temp->key = strdup(newK);
+	temp->value = strdup(newV);
 	temp->next = l;
 	return temp;
 }
@@ -85,13 +85,14 @@ void hashtableAdd(hashtable * h, char * key, char * value) {
 }
 
 void listFree(list * l) {
-	if (l){
-		list * temp = l->next;
-		free(l);
-		listFree(temp);
-	}
+    while (l != NULL) {
+        list * temp = l;
+        l = l->next;
+        free(temp->key);     
+        free(temp->value);   
+        free(temp);          
+    }
 }
-
 
 void hashtableFree(hashtable * h) {
 	if (h == NULL) return;

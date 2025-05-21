@@ -13,9 +13,9 @@ void test_randomPivot();
 int main(int argc, char ** argv) {
     srand(time(NULL));
 
-	//test_listPivot(); // DECOMMENTER APRES AVOIR TERMINE 1.1
-	//test_quicksort(); // DECOMMENTER APRES AVOIR TERMINE 1.2
-	//test_randomPivot(); // DECOMMENTER APRES AVOIR TERMINE 2
+	test_listPivot(); // DECOMMENTER APRES AVOIR TERMINE 1.1
+	test_quicksort(); // DECOMMENTER APRES AVOIR TERMINE 1.2
+	test_randomPivot(); // DECOMMENTER APRES AVOIR TERMINE 2
 }
 
 list* liste_test(){
@@ -60,6 +60,7 @@ void test_listPivot(){
     listDisplay(duo[0]);
     listDisplay(duo[1]);
     free(duo);
+ 
 
     printf("--- Fin du test ---\n\n\n");
 }
@@ -82,7 +83,7 @@ void test_quicksort(){
     l_copy = quickSort(l);
     listDisplay(l_copy);
     free(l_copy);
-    free(l);
+    listFree(l);
 
     printf("Test liste avec un seul element ");
     l = listAdd(l,3);
@@ -116,7 +117,7 @@ void test_randomPivot(){
         printf("%f ms\n", time_spent);
 
         printf("10 premiers elements de la liste triee avec pivot aleatoire: ");
-        list* temp = listCreate();
+        list* temp = NULL;
         list* temp_copy = l_copy;
         for (int i = 0; i < 10; i++){
             temp = listAdd(temp,temp_copy->value);

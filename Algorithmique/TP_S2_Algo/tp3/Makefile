@@ -1,17 +1,18 @@
 CFILES = $(wildcard *.c)
 HFILES = $(wildcard *.h)
 OFILES = $(patsubst %.c,%.o,$(CFILES))
-GCC_FLAGS = -Wall -g
-LD_FLAGS = 
-LIB = -lSDL2
+
+CFLAGS = -Wall -g
+LDFLAGS = -g         
+LIBS = -lSDL2
 
 all: main
 
 %.o: %.c $(HFILES)
-	gcc $(GCC_FLAGS) -c $<
+	gcc $(CFLAGS) -c $< -o $@
 
-main: $(OFILES) $(HFILES)
-	gcc $(LD_FLAGS) -o main $(OFILES) $(LIB)
+main: $(OFILES)
+	gcc $(LDFLAGS) -o $@ $^ $(LIBS)
 
 clean:
-	-rm $(OFILES)
+	rm -f $(OFILES) main

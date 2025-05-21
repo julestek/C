@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "linkedlist.h"
+#include <time.h>
+#define max(a,b) (a>=b?a:b)
+#define min(a,b) (a<=b?a:b)
 
 
 // Partie donnée aux étudiants
@@ -74,56 +77,51 @@ list* listCopy(list* l){
 }
 
 // Exo 1 : quicksort sans mémoire extra
-list** listPivot(list* l, int pivot){
-    list* gauche = listCreate();
-    list* droite = listCreate();
-    list** pg = &gauche;
+list** listPivot(list* l, int pivot) {
+    list* gauche = NULL;
+    list* droite = NULL;
+    list** pg = &gauche;  
     list** pd = &droite;
-    int i=0;
-    
-    while (l!=NULL){
-        list* suiv = l->next;
-        if (l->value > pivot){
+
+    int i = 0;
+
+    while (l != NULL) {
+        list* next = l->next; 
+        if (l->value == pivot && i==0) {
+            free(l); 
+            i = 1;
+        } else if (l->value > pivot) {
             *pd = l;
             pd = &l->next;
+        } else {
+            *pg = l;
+            pg = &l->next;
         }
-        else{
-            if (i==0){
-                free(l);
-                i++;
-            }
-            else{
-                *pg = l;
-                pg = &l->next;
-            }
-            l = suiv;
-        }
-
-        *pg = NULL;
-        *pd = NULL;
-
+        l = next;
     }
 
+    
+    *pg = NULL;
+    *pd = NULL;
 
-    list ** duo = (list **) malloc(2*sizeof(list *));
-    if (duo){
-        duo[0] = gauche;
-        duo[1] = droite;
-    } else{
-        return NULL;
-    }
+    list** duo = malloc(2 * sizeof(list*));
+    if (duo == NULL) return NULL;
+
+    duo[0] = gauche;
+    duo[1] = droite;
     return duo;
 }
+
 
 list* reassemble(list* gauche, list* droite, int pivot){
     
    list* l = listAdd(droite, pivot);
-   
+   if (gauche==NULL) {return l;}
    list* temp = gauche;
    while(temp->next!=NULL){
         temp = temp -> next;
    }
-   temp = l;
+   temp->next = l;
    return gauche;
 
 }
@@ -139,7 +137,7 @@ list* quickSort_rec(list* l){
         gauche = quickSort_rec(gauche);
         droite = quickSort_rec(droite);
 
-        reassemble(gauche, droite, pivot);
+        return reassemble(gauche, droite, pivot);
     }
 
     return l;
@@ -154,22 +152,46 @@ list* quickSort(list* l){
 
 // Exo 2 : choix du pivot aleatoire
 int getRandomElement(list* l){
-    
-    return 0;
+    if (l==NULL){return -1;}
+    int N = listSize(l);
+    int elt_rand = rand()%N;
+    list* temp = l;
+    while(elt_rand!=0 && temp!=NULL){
+        elt_rand--;
+        temp=temp->next;
+    }
+
+    return temp->value;
 }
 
 int getRandomPivot(list* l){
-    // A COMPLETER
-    return 0;
+    if (l==NULL){return -1;}
+    int a = getRandomElement(l);
+    int b = getRandomElement(l);
+    int c = getRandomElement(l);
+    int mediane = a + b + c - min(a, min(b, c)) - max(a, max(b, c));
+    return mediane;
 }
 
 list* quickSort_rec_alea(list* l){
-    // A COMPLETER
-    return NULL;
+    if(l!=NULL){
+        int pivot = getRandomPivot(l);
+        list** duo = listPivot(l, pivot);
+        list* gauche = duo[0];
+        list* droite = duo[1];
+
+        gauche = quickSort_rec_alea(gauche);
+        droite = quickSort_rec_alea(droite);
+
+        return reassemble(gauche, droite, pivot);
+    }
+
+    return l;
 }
 
 list* quickSort_alea(list* l){
-    // A COMPLETER
-    return NULL;
+    list* copy = listCopy(l);
+    copy = quickSort_rec_alea(copy);
+    return copy;
 }
  
